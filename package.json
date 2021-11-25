@@ -1,0 +1,18 @@
+{
+  "name": "betterstacy",
+  "version": "1.0.0",
+  "description": "Bot for the RDX Community ",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node bot.js"
+  },
+  "author": "deshan",
+  "license": "ISC",
+  "dependencies": {
+    "discord": "^0.8.2",
+    "discord.js": "^13.3.1",
+    "node-cache": "^5.1.2",
+    "run-script": "^0.1.1"
+  }
+}
