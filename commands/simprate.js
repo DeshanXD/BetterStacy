@@ -20,7 +20,7 @@ module.exports.run = async (bot, message, args) => {
 
 
         switch (userId) {
-            case 314225633196507136:
+            case "314225633196507136":
                     await message.reply(`You are the biggest simp in observable universe!`)
                 break;
             default:
