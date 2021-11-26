@@ -13,21 +13,42 @@ function simpRate() {
 module.exports.run = async (bot, message, args) => {
 
     try {
+        // if (message.mentions.members.first()) {
 
-        
-        if (simpCache.get(message.author.id) != null) {
+        //     console.log(message.mentions.members.first().user.id);
+        // }
+
+        // else if (simpCache.get(message.author.id) != null) {
             
-            rate = simpCache.get(message.author.id).e
-            await message.reply(`You are ${rate} simp in this server`)
+        //     rate = simpCache.get(message.author.id).e
+        //     await message.reply(`You are ${rate} simp in the simp Universe`)
 
+        // } else {
+
+            
+        //     rate = simpRate()
+        //     success = simpCache.set(message.author.id, { e: rate })
+
+
+        //     await message.reply(`You are ${rate} simp in the simp Universe`)
+        // }
+
+        const userId = (message.mentions.members.first()) ? message.mentions.members.first().user.id : message.author.id
+
+        let rate = simpCache.get(userId) ? simpCache.get(userId) : null 
+
+        console.log(rate);
+
+        if (rate) {
+            await message.reply(`You are ${rate.e} simp in the simp Universe`)
+            
         } else {
-
-            
             rate = simpRate()
-            success = simpCache.set(message.author.id, { e: rate })
+            console.log(userId);
+            s = simpCache.set(userId, { e: rate })
 
+            await message.reply(`You are ${rate} simp in the simp Universe`)
 
-            await message.reply(`You are ${rate} simp in this server`)
         }
 
 
