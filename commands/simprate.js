@@ -19,15 +19,21 @@ module.exports.run = async (bot, message, args) => {
         let rate = simpCache.get(userId) ? simpCache.get(userId) : null 
 
 
-        if (rate) {
-            await message.reply(`You are ${rate.e} simp in the simp Universe`)
-            
-        } else {
-            rate = simpRate()
-            s = simpCache.set(userId, { e: rate })
+        switch (userId) {
+            case 314225633196507136:
+                    await message.reply(`You are the biggest simp in observable universe!`)
+                break;
+            default:
+                if (rate) {
+                    await message.reply(`You are ${rate.e} simp in the simp Universe`)
+                    
+                } else {
+                    rate = simpRate()
+                    s = simpCache.set(userId, { e: rate })
 
-            await message.reply(`You are ${rate} simp in the simp Universe`)
+                    await message.reply(`You are ${rate} simp in the simp Universe`)
 
+                }
         }
 
 
