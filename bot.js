@@ -48,20 +48,6 @@ for (const file of eventFiles) {
 }
 
 
-// EVENT HANDLING
-client.on('ready', async () => {
-    console.log(`${client.user.username} is activated`);
-
-    client.user.setActivity(`With Love`)
-
-    // client.generateInvite({
-    //     // Fix Perms scheme {TEMP: ADMIN}
-    //     permissions : ['ADMINISTRATOR'],
-    // })
-
-    // .then(link => console.log(`${link}`))
-})
-
 
 client.on('messageCreate', async message => {
     if(message.author.bot) return;
