@@ -10,15 +10,13 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 client.commands = new Discord.Collection()
 
 
-// FILE READ ASYNC
+// Reading commands from @commands directory
 fs.readdir('./commands/', (err, files) => {
     if (err) {
         console.log(err);
     }
-
 	
     let jsFiles = files.filter(f => f.split(".").pop() === "js");
-    
     
 	if (jsFiles.length <= 0) {
 
@@ -36,6 +34,18 @@ fs.readdir('./commands/', (err, files) => {
 
 	});
 })
+
+// Reading event files from @events directory
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
+}
 
 
 // EVENT HANDLING
