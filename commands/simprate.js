@@ -4,6 +4,9 @@ const  Discord = module.require('discord.js')
 const NodeCache = require( "node-cache" );
 const simpCache = new NodeCache( { stdTTL: 100, checkperiod: 120 } );
 
+//util imports
+const getUserFromMention = require("../util/userId");
+
 
 function simpRate() {
     
@@ -14,24 +17,28 @@ module.exports.run = async (bot, message, args) => {
 
     try {
 
-        const userId = (message.mentions.members.first()) ? message.mentions.members.first().user.id : message.author.id
-
+        let userId = getUserFromMention(message)
         let rate = simpCache.get(userId) ? simpCache.get(userId) : null 
 
 
+        
         switch (userId) {
             case "314225633196507136":
-                    await message.reply(`You are the biggest simp in observable universe!`)
+                    await message.reply(`You are the biggest Simp in observable universe!`)
+                break;
+
+            case "e" :
+                    await message.reply(`Are you dumb? You can't mention roles`)
                 break;
             default:
                 if (rate) {
-                    await message.reply(`You are ${rate.e} simp in the simp Universe`)
+                    await message.reply(`You are ${rate.e} Simp in the Simpverse`)
                     
                 } else {
                     rate = simpRate()
                     s = simpCache.set(userId, { e: rate })
 
-                    await message.reply(`You are ${rate} simp in the simp Universe`)
+                    await message.reply(`You are ${rate} Simp in the Simpverse`)
 
                 }
         }
