@@ -40,7 +40,7 @@ fs.readdir('./commands/', (err, files) => {
 
 // EVENT HANDLING
 client.on('ready', async () => {
-    console.log("`BetterStacy is activated`");
+    console.log(`${client.user.username} is activated`);
 
     client.user.setActivity(`With Love`)
 
