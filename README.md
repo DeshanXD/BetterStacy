@@ -13,12 +13,6 @@ In order to run this you already should have node installed and add config.json 
 }
 ```
 
-```bash
-npm install 
-
-node bot.js
-```
-
 ## Usage
 
 ```javascript
