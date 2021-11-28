@@ -6,15 +6,16 @@ BetterStacy is intergrated with the fun and moderative commands. This bot is ori
 
 In order to run this you already should have node installed and add config.json to main directory
 
-```json
+```javascript
 {
     prefix: "!",
     token: "Your bot token"
 }
 ```
-then you can run it normally 
+
 ```bash
 npm install 
+
 node bot.js
 ```
 
