@@ -53,11 +53,11 @@ module.exports = {
         }
 
 
-        await deliverd_message.awaitReactions({ filter, time: 15_000 })
+        await deliverd_message.awaitReactions({ filter, time: 10_000 })
           .then(collected => {
             // console.log(`Collected ${collected.size} reactions`)
             deliverd_message.delete();
-            if (collected.size > (currentVoiceMembers.size / 2)){
+            if (collected.size >= (currentVoiceMembers.size / 2)){
               memberObject.voice.setMute(true)
               
               // if((role = memberObject.guild.roles.cache.find(role => role.name === "StacyHateYou")) === null){
@@ -82,7 +82,7 @@ module.exports = {
                 memberObject.voice.setMute(false)
                 // memberObject.roles.remove(role);
                 console.log(`Unmuted ${memberObject.user}`)
-              }, 20_000)
+              }, 45_000)
             }
           })
           .catch(console.error);
@@ -90,7 +90,7 @@ module.exports = {
 
       }
     } catch (e) {
-      console.log(`!servermute commad debug: ${e}`);
+      console.log(`!tempmute commad debug: ${e}`);
     }
   },
 };
