@@ -53,16 +53,36 @@ module.exports = {
         }
 
 
-        await deliverd_message.awaitReactions({ filter, time: 10_000 })
+        await deliverd_message.awaitReactions({ filter, time: 15_000 })
           .then(collected => {
-            console.log(`Collected ${collected.size} reactions`)
+            // console.log(`Collected ${collected.size} reactions`)
 
             if (collected.size >= (currentVoiceMembers.size / 2)){
               memberObject.voice.setMute(true)
+              
+              // if((role = memberObject.guild.roles.cache.find(role => role.name === "StacyHateYou")) === null){
+              //   memberObject.guild.roles.create({
+              //     name: 'StacyHateYou',
+              //     color: 'BLUE',
+              //     reason: 'Stacy want to mute people',
+              //     permissions: {
+              //       MUTE_MEMBERS : false
+              //     },
+              //     position: 1
+              //   })
+              //   role = memberObject.guild.roles.cache.find(role => role.name === "StacyHateYou")
+              //   memberObject.roles.add(role);
+              // } else {
+              //   memberObject.roles.add(role);
+              // }
+
+              console.log(`Muted ${memberObject.user}`)
 
               setTimeout(() => {
                 memberObject.voice.setMute(false)
-              }, 10_000)
+                // memberObject.roles.remove(role);
+                console.log(`Unmuted ${memberObject.user}`)
+              }, 20_000)
             }
           })
           .catch(console.error);
