@@ -13,6 +13,10 @@ module.exports = {
 
   async execute(client, message, args) {
     let userId = getUserFromMention(message);
+    // let m1emberObject = message.mentions.users.first().member
+
+    // console.log(m1emberObject)
+    let memberObject = message.guild.members.cache.get(userId)
     let userObject = client.users.cache.get(userId);
 
     // console.log(userObject)
@@ -41,18 +45,26 @@ module.exports = {
         });
 
         await deliverd_message.react("✅");
+
+        const currentVoiceMembers = message.member.voice.channel.members
         
         const filter = (reaction, user) => {
-
-          
-          console.log(message.member.voice.channel.members.forEach(m => m.guild.id))
-
-
-          return reaction.emoji.name === '✅' && user.id === message.member.voice.channel.members.forEach(m => m.user.id)
-
+          return reaction.emoji.name === '✅' && user.id === currentVoiceMembers.find(m => m.user.id).user.id
         }
-        deliverd_message.awaitReactions({ filter, time: 10_000 })
-          .then(collected => console.log(`Collected ${collected.size} reactions`))
+
+
+        await deliverd_message.awaitReactions({ filter, time: 10_000 })
+          .then(collected => {
+            console.log(`Collected ${collected.size} reactions`)
+
+            if (collected.size >= (currentVoiceMembers.size / 2)){
+              memberObject.voice.setMute(true)
+
+              setTimeout(() => {
+                memberObject.voice.setMute(false)
+              }, 10_000)
+            }
+          })
           .catch(console.error);
 
 
