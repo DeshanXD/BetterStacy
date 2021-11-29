@@ -25,7 +25,7 @@ module.exports = {
       .setColor("#0099ff")
       .setAuthor(`${userObject.username}`, `${userObject.avatarURL()}`)
       .setDescription(
-        `${userObject} You are getting vote muted by people on ${message.member.voice.channel.name} initiated by ${message.author} `
+        `You are getting vote muted by people on channel | ${message.member.voice.channel.name} | initiated by ${message.author} `
       );
 
     // TODO fix: identify the user's voice state to make the command only be available in the voice chat
@@ -56,8 +56,8 @@ module.exports = {
         await deliverd_message.awaitReactions({ filter, time: 15_000 })
           .then(collected => {
             // console.log(`Collected ${collected.size} reactions`)
-
-            if (collected.size >= (currentVoiceMembers.size / 2)){
+            deliverd_message.delete();
+            if (collected.size > (currentVoiceMembers.size / 2)){
               memberObject.voice.setMute(true)
               
               // if((role = memberObject.guild.roles.cache.find(role => role.name === "StacyHateYou")) === null){
