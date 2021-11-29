@@ -2,14 +2,15 @@
 
 BetterStacy is intergrated with the fun and moderative commands. This bot is originally desineged for the use of public 
 
-## Installation and test 
+## Installation
 
-In order to run this you already should have node interface running..
+In order to run this you already should have node installed and add config.json to main directory
 
-```bash
-npm install  <Within the directory>
-
-node bot.js
+```javascript
+{
+    prefix: "!",
+    token: "Your bot token"
+}
 ```
 
 ## Usage
