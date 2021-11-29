@@ -8,7 +8,7 @@ const getUserFromMention = require("../util/userId");
 
 // exporting the module
 module.exports = {
-  name: "servermute",
+  name: "tempmute",
   description: " Server mute random people!",
 
   async execute(client, message, args) {
