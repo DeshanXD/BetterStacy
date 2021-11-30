@@ -13,13 +13,10 @@ module.exports = {
 
   async execute(client, message, args) {
     let userId = getUserFromMention(message);
-    // let m1emberObject = message.mentions.users.first().member
 
-    // console.log(m1emberObject)
     let memberObject = message.guild.members.cache.get(userId)
     let userObject = client.users.cache.get(userId);
 
-    // console.log(userObject)
 
     const votemuteEmbed = new MessageEmbed()
       .setColor("#0099ff")
@@ -28,7 +25,16 @@ module.exports = {
         `You are getting vote muted by people on channel | ${message.member.voice.channel.name} | initiated by ${message.author} `
       );
 
-    // TODO fix: identify the user's voice state to make the command only be available in the voice chat
+
+      
+    const editedVotMuteEmbed = new MessageEmbed()
+    .setColor("#0099ff")
+    .setAuthor(`${userObject.username}`, `${userObject.avatarURL()}`)
+    .setDescription(
+      `You got vote muted by ${message.member.voice.channel.name} chat using !tempmute`
+    );
+
+
     try {
       if (userId === message.author.id) {
         await message.reply("Are you dumb? mention someone first!");
@@ -56,7 +62,7 @@ module.exports = {
         await deliverd_message.awaitReactions({ filter, time: 10_000 })
           .then(collected => {
             // console.log(`Collected ${collected.size} reactions`)
-            deliverd_message.delete();
+            message.delete();
             if (collected.size >= (currentVoiceMembers.size / 2)){
               memberObject.voice.setMute(true)
               
@@ -77,12 +83,16 @@ module.exports = {
               // }
 
               console.log(`Muted ${memberObject.user}`)
+              await deliverd_message.edit({ embeds: [editedVotMuteEmbed] });
 
               setTimeout(() => {
                 memberObject.voice.setMute(false)
                 // memberObject.roles.remove(role);
                 console.log(`Unmuted ${memberObject.user}`)
+                await message.channel.send
               }, 45_000)
+            } else {
+                deliverd_message.delete();
             }
           })
           .catch(console.error);
