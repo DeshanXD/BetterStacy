@@ -3,7 +3,7 @@ module.exports = (Discord, client) => {
 
 //   client.user.setActivity('discord.js', { type: 'PLAYING', status: 'dnd' })
 
-client.user.setActivity("With Love!", {
+client.user.setActivity("!help | betterstacy.me", {
     type: "PLAYING",
     // url: ""
   });
