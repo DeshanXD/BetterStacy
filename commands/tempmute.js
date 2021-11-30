@@ -83,13 +83,12 @@ module.exports = {
               // }
 
               console.log(`Muted ${memberObject.user}`)
-              await deliverd_message.edit({ embeds: [editedVotMuteEmbed] });
+              deliverd_message.edit({ embeds: [editedVotMuteEmbed] });
 
               setTimeout(() => {
                 memberObject.voice.setMute(false)
                 // memberObject.roles.remove(role);
                 console.log(`Unmuted ${memberObject.user}`)
-                await message.channel.send
               }, 45_000)
             } else {
                 deliverd_message.delete();
